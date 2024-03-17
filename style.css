@@ -1,0 +1,145 @@
+/* まず、style.cssにこのルールを書き入れてください。 */
+*{
+margin: 0;
+padding: 0;
+}
+
+body {
+  font-size: 100%;
+}
+
+/* ここにルールを足していきましょう。*/
+
+header{
+  font-size: 24pt;
+  text-align: center;
+  border-bottom: 1px solid #333;
+}
+
+/* p{
+  background-color: yellow;
+} */
+
+#top{
+  color: green;
+  font-family: serif;
+}
+
+#three{
+  color: red;
+  font-family: serif;
+}
+
+#calculation{
+  color: red;
+  font-family: serif;
+}
+
+
+.button{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: auto;
+  width: 24em;
+  height: 2em;
+  font-size: 24pt;
+  font-family: serif;
+  cursor: pointer;
+}
+
+.container{
+  width: 100%;
+  padding: 1em 0;
+  font-size: 48pt;
+  text-align: center;
+}
+
+#plusButton{
+  position: absolute;
+  width: 19%;
+  height: 10%;
+  font-size: 48pt;
+  top: 50%;
+  left: 51%;
+}
+
+#minusButton{
+  position: absolute; 
+  width: 19%;
+  height: 10%;
+  font-size: 48pt;
+  top: 50%;
+  left: 30%;
+}
+
+#resetButton{
+  position: absolute; 
+  width: 30%;
+  height: 10%;
+  font-size: 24pt;
+  top: 65%;
+  left: 35%;
+}
+
+#backButton{
+  position: absolute; 
+  width: 30%;
+  height: 10%;
+  font-size: 24pt;
+  top: 80%;
+  left: 35%;
+}
+
+#choice1{
+  position: absolute; 
+  width: 15%;
+  height: 10%;
+  font-size: 24pt;
+  top: 60%;
+  left: 20%;
+}
+
+#choice2{
+  position: absolute; 
+  width: 15%;
+  height: 10%;
+  font-size: 24pt;
+  top: 60%;
+  left: 40%;
+}
+
+#choice3{
+  position: absolute; 
+  width: 15%;
+  height: 10%;
+  font-size: 24pt;
+  top: 60%;
+  left: 60%;
+}
+
+/* #nabeatsu{
+width: 15%;
+height: 3em;
+font-size: 16pt;
+font-family: serif;
+text-align: center;
+}
+
+#calculation{
+width: 15%;
+height: 3em;
+font-size: 16pt;
+font-family: serif;
+font-size: 16pt;
+}
+
+#prime{
+width: 15%;
+height: 3em;
+font-size: 16pt;
+font-family: serif;
+font-size: 16pt;
+} */
