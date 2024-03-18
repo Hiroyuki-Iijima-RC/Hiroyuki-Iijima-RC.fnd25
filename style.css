@@ -93,6 +93,26 @@ header{
   left: 35%;
 }
 
+#startButton{
+  position: absolute; 
+  width: 30%;
+  height: 10%;
+  font-size: 24pt;
+  top: 60%;
+  left: 35%;
+  /* visibility: hidden; */
+}
+
+#retryButton{
+  position: absolute; 
+  width: 30%;
+  height: 10%;
+  font-size: 24pt;
+  top: 60%;
+  left: 35%;
+  visibility: hidden;
+}
+
 #choice1{
   position: absolute; 
   width: 15%;
@@ -100,6 +120,7 @@ header{
   font-size: 24pt;
   top: 60%;
   left: 20%;
+  visibility: hidden;
 }
 
 #choice2{
@@ -109,6 +130,7 @@ header{
   font-size: 24pt;
   top: 60%;
   left: 40%;
+  visibility: hidden;
 }
 
 #choice3{
@@ -118,7 +140,59 @@ header{
   font-size: 24pt;
   top: 60%;
   left: 60%;
+  visibility: hidden;
 }
+
+#comment{
+  font-size: 48px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  /* visibility: hidden; */
+}
+
+#numberX{
+  font-size: 108px;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  visibility: hidden;
+}
+
+#arithmetic{
+  font-size: 108px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  visibility: hidden;
+}
+
+#numberY{
+  font-size: 108px;
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  visibility: hidden;
+}
+
+#timemessage{
+  font-size: 36px;
+  position: absolute;
+  top: 15%;
+  left: 85%;
+  visibility: hidden;
+}
+
+#timercount{
+  font-size: 36px;
+  position: absolute;
+  top: 20%;
+  left: 89%;
+  visibility: hidden;
+}
+
+
+
 
 /* #nabeatsu{
 width: 15%;
