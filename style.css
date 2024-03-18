@@ -144,7 +144,7 @@ header{
 }
 
 #comment{
-  font-size: 48px;
+  font-size: 3vw;
   position: absolute;
   top: 25%;
   left: 25%;
@@ -152,7 +152,7 @@ header{
 }
 
 #numberX{
-  font-size: 108px;
+  font-size: 4vw;
   position: absolute;
   top: 30%;
   left: 40%;
@@ -160,7 +160,7 @@ header{
 }
 
 #arithmetic{
-  font-size: 108px;
+  font-size: 4vw;
   position: absolute;
   top: 30%;
   left: 50%;
@@ -168,7 +168,7 @@ header{
 }
 
 #numberY{
-  font-size: 108px;
+  font-size: 4vw;
   position: absolute;
   top: 30%;
   left: 60%;
@@ -176,44 +176,24 @@ header{
 }
 
 #timemessage{
-  font-size: 36px;
+  font-size: 3vw;
   position: absolute;
-  top: 15%;
+  top: 14%;
   left: 85%;
   visibility: hidden;
 }
 
 #timercount{
-  font-size: 36px;
+  font-size: 3vw;
   position: absolute;
   top: 20%;
   left: 89%;
   visibility: hidden;
 }
 
+#result{
+  position: absolute;
+  top: 35%;
+  left: 75%;
 
-
-
-/* #nabeatsu{
-width: 15%;
-height: 3em;
-font-size: 16pt;
-font-family: serif;
-text-align: center;
 }
-
-#calculation{
-width: 15%;
-height: 3em;
-font-size: 16pt;
-font-family: serif;
-font-size: 16pt;
-}
-
-#prime{
-width: 15%;
-height: 3em;
-font-size: 16pt;
-font-family: serif;
-font-size: 16pt;
-} */
