@@ -3,30 +3,40 @@
   <head>
     <title>頭の体操  計算テスト</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="script.js"></script>
   </head>
   <body>
-    <div class="container">
-    <h1 id="calculation">頭の体操  計算テスト</h1>
-    <h2>作成中･･･</h2>
-
-
+    <header>
+      <div>
+      <h1 id="calculation">頭の体操  計算テスト</h1>
+      </div>
+    </header>
+    
+    <p id="timemessage">残り時間</p>
+    <p id="timercount">30</p>
     <!-- <p class="awesome">c</p>
     class="btn btn-outline-secondary col-1" type="button"
     <p id="d">d <span class="little">e</span></p>
     <p class="great">f</p> -->
+    <div>
+      <a id="comment">３カウント後に問題文が表示されます<br>
+      下記の選択肢から答えを選んでね！<br>
+      制限時間内に何問解けるかな？</a>
+      <a id="numberX">0</a>
+      <a id="arithmetic">+</a>
+      <a id="numberY">0</a>
     </div>
-    <p id="counter">0</p>
-
+    
     <div class="button">
       <button id="choice1">選択肢１</button>
       <button id="choice2">選択肢２</button>
       <button id="choice3">選択肢３</button>
     </div>
     <div>
-      <button id="startButton" onclick="location.href='./index.html'">スタート</button><br>
-      <button id="backButton" onclick="location.href='./index.html'">戻る</button><br>
+      <button id="startButton">スタート</button>
+      <button id="retryButton" onclick="window.location.reload();">もう一回！</button>
+      <button id="backButton" onclick="location.href='./index.html'">戻る</button>
     </div>
 
   </body>
+  <script type="text/javascript" src="scriptcalc.js"></script>
 </html>
