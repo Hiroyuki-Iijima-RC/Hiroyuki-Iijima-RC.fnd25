@@ -15,8 +15,6 @@ plusButton.addEventListener("click", plusCount);
 minusButton.addEventListener("click", minusCount);
 resetButton.addEventListener("click", resetCount);
 
-  
-
  
 function plusCount() {
   count++;
