@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja">
+
   <head>
     <title>頭の体操  計算テスト</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
+
   <body>
     <header>
       <div>
@@ -12,29 +14,32 @@
     </header>
     
     <p id="timemessage">残り時間</p>
-    <p id="timercount">30</p>
-    <!-- <p class="awesome">c</p>
-    class="btn btn-outline-secondary col-1" type="button"
-    <p id="d">d <span class="little">e</span></p>
-    <p class="great">f</p> -->
+    <p id="timercount">15</p>
+
     <div>
-      <a id="comment">３カウント後に問題文が表示されます<br>
+      <a id="comment">３カウント後に計算式が表示されます<br>
       下記の選択肢から答えを選んでね！<br>
-      制限時間内に何問解けるかな？</a>
+      １５秒以内に何問解けるかな？</a>
       <a id="numberX">0</a>
       <a id="arithmetic">+</a>
       <a id="numberY">0</a>
     </div>
-    <table border="1" id="table">
+    <table id="table">
       <tr>
         <th>計算式</th><th>あなたの回答</th><th>合否</th>
       </tr>
     </table>
     <div class="button">
-      <button id="choice1">選択肢１</button>
-      <button id="choice2">選択肢２</button>
-      <button id="choice3">選択肢３</button>
+      <button id="choiceOne">選択肢１</button>
+      <button id="choiceTwo">選択肢２</button>
+      <button id="choiceThree">選択肢３</button>
     </div>
+    <select id="difficulty">
+      <option value="easy">初級</option>
+      <option value="normal">中級</option>
+      <option value="hard">上級</option>
+      <option value="nightmare">ナイトメア</option>
+    </select>
     <div>
       <button id="startButton">スタート</button>
       <button id="retryButton" onclick="window.location.reload();">もう一回！</button>
