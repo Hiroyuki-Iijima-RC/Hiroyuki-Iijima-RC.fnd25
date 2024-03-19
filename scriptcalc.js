@@ -1,12 +1,23 @@
 'use strict'
 // 1行目に記載している 'use strict' は削除しないでください
 
-let randomNunber, x, arith, y, answer, tempNumber;
-let time = 3;
-let question = 0;
-let questionObject = [];
-let countDownTimer;
-let implement = false;
+let randomNunber;       //乱数格納用変数
+let numX;               //値その１
+let arith;              //四則演算記号
+let numY;               //値その２
+let answer;             //四則演算の答え
+let tempNum;            //numXとnumYの値を入れ替える為の
+let time = 3;           //開始前の３カウント用
+let limit = 15;         //制限時間の１５カウント用
+let question = 0;       //何問目かをカウントする
+let correct = 0;        //正解数をカウントする
+let arithAdjustLower;   //難易度による四則演算記号の乱数調整をする
+let arithAdjustUpper;   //難易度による四則演算記号の乱数調整をする
+let lowerLimit;         //乱数の下限値
+let upperLimit;         //乱数の上限値
+let questionObject = [];//計算式・回答・合否を格納する配列
+let countDownTimer;     //setInterval用の変数
+let implement = false;  //テスト中かどうかの判断
 
 // 画面表示コメントの要素取得
 const comment = document.getElementById("comment");
@@ -17,241 +28,273 @@ const timemessage = document.getElementById("timemessage");
 const timercount = document.getElementById("timercount");
 
 // 3択ボタンの要素取得
-const choice1 = document.getElementById("choice1");
-const choice2 = document.getElementById("choice2");
-const choice3 = document.getElementById("choice3");
+const choiceOne = document.getElementById("choiceOne");
+const choiceTwo = document.getElementById("choiceTwo");
+const choiceThree = document.getElementById("choiceThree");
 
 // スタート・リトライ・戻るボタンの要素取得
 const startButton = document.getElementById("startButton");
 const retryButton = document.getElementById("retryButton");
 const backButton = document.getElementById("backButton");
 
+// 結果表示用テーブルの要素を取得
 const table = document.getElementById("table");
 
+// 難易度選択の要素を取得
+const difficulty = document.getElementById("difficulty");
 
+// イベントリスナー設定
 startButton.addEventListener("click", start);
-choice1.addEventListener("click", calcJudge1);
-choice2.addEventListener("click", calcJudge2);
-choice3.addEventListener("click", calcJudge3);
-  
+choiceOne.addEventListener("click", calcJudgeOne);
+choiceTwo.addEventListener("click", calcJudgeTwo);
+choiceThree.addEventListener("click", calcJudgeThree);
+
 // スタートボタンが押されたときに実行
 function start() {
-  // console.log(time);
-  comment.innerText = "";
+  // 難易度確認
+  if (difficulty.value === "easy") {
+    // 四則演算記号：「+」「-」
+    // 数字の範囲：１～９
+    arithAdjustLower = 1;
+    arithAdjustUpper = 2;
+    lowerLimit = 1;
+    upperLimit = 9;
+  } else if (difficulty.value === "normal") {
+    // 四則演算記号：「+」「-」「×」
+    // 数字の範囲：５～１９
+    arithAdjustLower = 1;
+    arithAdjustUpper = 3;
+    lowerLimit = 5;
+    upperLimit = 15;
+  } else if (difficulty.value === "hard") {
+    // 四則演算記号：「+」「-」「×」「÷」
+    // 数字の範囲：１５～３９
+    arithAdjustLower = 1;
+    arithAdjustUpper = 4;
+    lowerLimit = 15;
+    upperLimit = 25;
+  } else if (difficulty.value === "nightmare") {
+    // 四則演算記号：「×」「÷」
+    // 数字の範囲：５０～９９
+    arithAdjustLower = 3;
+    arithAdjustUpper = 2;
+    lowerLimit = 50;
+    upperLimit = 50;
+  }
+
+  comment.innerText = `難易度：${difficulty.value}`;
   arithmetic.innerText = time;
   arithmetic.style.visibility = "visible";
   startButton.style.visibility = "hidden";
   backButton.style.visibility = "hidden";
+  difficulty.style.visibility = "hidden";
   countDownTimer = setInterval(countDown, 1000);
 }
 
-// 3カウント→10カウント処理
+// ３カウント→１５カウント処理
 function countDown() {
   if (time === 1 && implement === false) {  // 3カウントダウン後、テスト開始時に動く
-    // clearInterval(countDown);
 
+    // テスト中のフラグ
     implement = true;
-    time = 10;
-    // startButton.style.visibility = "visible";
-    choice1.style.visibility = "visible";
-    choice2.style.visibility = "visible";
-    choice3.style.visibility = "visible";
+
+    // テストで使う要素を表示
+    choiceOne.style.visibility = "visible";
+    choiceTwo.style.visibility = "visible";
+    choiceThree.style.visibility = "visible";
     numberX.style.visibility = "visible";
     numberY.style.visibility = "visible";
     timemessage.style.visibility = "visible";
-    timercount.innerText = time;
+    timercount.innerText = limit;
     timercount.style.visibility = "visible";
+    // table.style.visibility = "visible";
+
+    // 計算式を生成
     decideArithmetic();
-  } else if (time === 1 && implement === true) {  // テスト終了時に動く
-    time = 3;
-    implement = false;
+  } else if (limit === 1 && implement === true) {  // テスト終了時に動く
+
+    // countDownTimerを停止する
     clearInterval(countDownTimer);
     timercount.innerText = 0;
-    console.log(questionObject);
-    console.log("お疲れ様でした");
-    comment.innerText = "お疲れ様でした！"
+
+    // 結果を画面中央に表示する
+    comment.innerText = `${question}問中 ${correct}問正解！\nお疲れ様でした！`;
+
+    // テストで使っていた要素を非表示にする
     numberX.style.visibility = "hidden";
     arithmetic.style.visibility = "hidden";
     numberY.style.visibility = "hidden";
-    choice1.style.visibility = "hidden";
-    choice2.style.visibility = "hidden";
-    choice3.style.visibility = "hidden";    
+    choiceOne.style.visibility = "hidden";
+    choiceTwo.style.visibility = "hidden";
+    choiceThree.style.visibility = "hidden";
+
+    // もう一回ボタンと戻るボタンを表示する
     retryButton.style.visibility = "visible";
     backButton.style.visibility = "visible";
-  } else if (implement === false) {   // 最初の3カウントダウン
-    time -= 1;
+
+  } else if (implement === false) {   // 最初の３カウントダウン
+    time--;
     arithmetic.innerText = time;
-  } else if (implement === true) {    // 10カウントダウン
-    time -= 1;
-    timercount.innerText = time;
+  } else if (implement === true) {    // １５カウントダウン
+    limit--;
+    timercount.innerText = limit;
   }
 }
 
 // 計算式作成
 function decideArithmetic() {
+  // 計算式を格納する空配列を作成
   const decideResult = [];
 
-  randomNunber = Math.floor(Math.random() * 4);
+  // 四則演算記号を乱数を使って決める
+  randomNunber = Math.floor(Math.random() * arithAdjustUpper + arithAdjustLower);   
 
-  if (randomNunber === 0) {
+  if (randomNunber === 1) {
     arith = "+";
-  } else if (randomNunber === 1) {
-    arith = "-";
   } else if (randomNunber === 2) {
-    arith = "×";
+    arith = "-";
   } else if (randomNunber === 3) {
+    arith = "×";
+  } else if (randomNunber === 4) {
     arith = "÷";
   }
 
-  y = Math.floor(Math.random() * 9 + 1);
+  // １～９までの乱数を変数に格納
+  numY = Math.floor(Math.random() * upperLimit + lowerLimit);
 
+  // 割り算の時に割り切れる数になるようにする
   if (arith === "÷") {
-    x = y * Math.floor(Math.random() * 9 + 1);
+    numX = numY * Math.floor(Math.random() * upperLimit + lowerLimit);
   } else {
-    x = Math.floor(Math.random() * 9 + 1);
+    numX = Math.floor(Math.random() * upperLimit + lowerLimit);
   }
 
   // 引き算の時に計算結果がマイナスにならないようにする
-  if (x < y && arith === "-") {
-    tempNumber = y;
-    y = x;
-    x = tempNumber;
+  if (numX < numY && arith === "-") {
+    tempNum = numY;
+    numY = numX;
+    numX = tempNum;
   }
 
+  // 四則演算記号に沿った計算を行う
   if (arith === "+") {
-    answer = x + y;
+    answer = numX + numY;
   } else if (arith === "-") {
-    answer = x - y;
+    answer = numX - numY;
   } else if (arith === "×") {
-    answer = x * y;
+    answer = numX * numY;
   } else if (arith === "÷") {
-    answer = x / y;
+    answer = numX / numY;
   }
 
+  // 計算式の値と四則演算記号を配列に格納する
   decideResult.push(question);
-
-  decideResult.push(x);
+  decideResult.push(numX);
   decideResult.push(arith);
-  decideResult.push(y);
+  decideResult.push(numY);
 
+
+  //３択ボタンの配置をどうするか乱数（１～３）で決める
   randomNunber = Math.floor(Math.random() * 3 + 1);
 
   if (randomNunber === 1) {
-    choice1.innerText = answer;
-    choice2.innerText = answer + 1;
-    choice3.innerText = answer + 2;
+    //乱数が１のとき、選択肢１に正解を、選択肢２・３に誤答を入れる
+    choiceOne.innerText = answer;
+    choiceTwo.innerText = answer + 1;
+    choiceThree.innerText = answer + 2;
     decideResult.push(answer);
     decideResult.push(answer + 1);
     decideResult.push(answer + 2);
     decideResult.push("1");
   } else if (randomNunber === 2) {
-    choice1.innerText = answer - 1;
-    choice2.innerText = answer;
-    choice3.innerText = answer + 1;
+    //乱数が２のとき、選択肢２に正解を、選択肢１・３に誤答を入れる
+    choiceOne.innerText = answer - 1;
+    choiceTwo.innerText = answer;
+    choiceThree.innerText = answer + 1;
     decideResult.push(answer - 1);
     decideResult.push(answer);
     decideResult.push(answer + 1);
     decideResult.push("2");    
   } else if (randomNunber === 3) {
-    choice1.innerText = answer - 2;
-    choice2.innerText = answer - 1;
-    choice3.innerText = answer;
+    //乱数が３のとき、選択肢３に正解を、選択肢１・２に誤答を入れる    
+    choiceOne.innerText = answer - 2;
+    choiceTwo.innerText = answer - 1;
+    choiceThree.innerText = answer;
     decideResult.push(answer - 2);
     decideResult.push(answer - 1);
     decideResult.push(answer);
     decideResult.push("3");  
   }
 
-
-  numberX.innerText = x;
+  // HTML上で値を表示
+  numberX.innerText = numX;
   arithmetic.innerText = arith;
-  numberY.innerText = y;
+  numberY.innerText = numY;
+  
+  // 計算式と解答の配列を格納する
   questionObject.push(decideResult);
-
-
+  
   return decideResult;
 }
 
-function calcJudge1() {
-  if (questionObject[question][7] === "1") {
-    questionObject[question].push("○");
-  } else {
-    questionObject[question].push("×");
-  }
-
-  let tr = document.createElement("tr");
-
-  let td1 = document.createElement("td");
-  td1.innerText = questionObject[question][1] + questionObject[question][2] + questionObject[question][3];
-  console.log(td1);
-  tr.appendChild(td1);
-
-  let td2 = document.createElement("td");
-  td2.innerText = questionObject[question][4];
-  tr.appendChild(td2);
-
-  let td3 = document.createElement("td");
-  td3.innerText = questionObject[question][8];
-  tr.appendChild(td3);  
-
-  table.appendChild(tr);
-
-  question++;
-  decideArithmetic();
+// 選択肢１ボタンを押したとき
+function calcJudgeOne() {
+  createTable("1");
 }
 
-function calcJudge2() {
-  if (questionObject[question][7] === "2") {
-    questionObject[question].push("○");
-  } else {
-    questionObject[question].push("×");
-  }
-  
-  let tr = document.createElement("tr");
-
-  let td1 = document.createElement("td");
-  td1.innerText = questionObject[question][1] + questionObject[question][2] + questionObject[question][3];
-  console.log(td1);
-  tr.appendChild(td1);
-
-  let td2 = document.createElement("td");
-  td2.innerText = questionObject[question][5];
-  tr.appendChild(td2);
-
-  let td3 = document.createElement("td");
-  td3.innerText = questionObject[question][8];
-  tr.appendChild(td3);  
-
-  table.appendChild(tr);
-
-  question++;
-  decideArithmetic();
+// 選択肢２ボタンを押したとき
+function calcJudgeTwo() {
+  createTable("2");
 }
 
-function calcJudge3() {
-  if (questionObject[question][7] === "3") {
+// 選択肢３ボタンを押したとき
+function calcJudgeThree() {
+  createTable("3");
+}
+
+
+function createTable(calcJudge) {
+  // 選択したボタンが回答の選択肢と同じ場合は「○」を格納
+  if (questionObject[question][7] === calcJudge) {
     questionObject[question].push("○");
+    correct++;
   } else {
     questionObject[question].push("×");
   }
-  
+
+  // テーブルの要素を追加
   let tr = document.createElement("tr");
 
+  // td要素を作成して計算式を書き込む
   let td1 = document.createElement("td");
   td1.innerText = questionObject[question][1] + questionObject[question][2] + questionObject[question][3];
-  console.log(td1);
+  // console.log(td1);
   tr.appendChild(td1);
 
+  // td要素を作成して選択したボタンに表示されていた値を書き込む
   let td2 = document.createElement("td");
-  td2.innerText = questionObject[question][6];
+
+  if (calcJudge === "1") {
+    td2.innerText = questionObject[question][4];
+  } else if (calcJudge === "2") {
+    td2.innerText = questionObject[question][5];
+  } else if (calcJudge === "3") {
+    td2.innerText = questionObject[question][6];
+  }
+
   tr.appendChild(td2);
 
+  // td要素を作成して、この関数内で追加した「○」または「×」を書き込む
   let td3 = document.createElement("td");
   td3.innerText = questionObject[question][8];
   tr.appendChild(td3);  
 
+  // テーブルに追加したtd要素を書き込む
   table.appendChild(tr);
 
+  // 問題数のカウントを１増やす
   question++;
-  decideArithmetic();
+
+  // 再度、計算式の生成を行なう
+  decideArithmetic();  
 }
