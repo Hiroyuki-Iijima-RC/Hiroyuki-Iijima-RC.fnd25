@@ -86,34 +86,34 @@ header{
 
 #backButton{
   position: absolute; 
-  width: 30%;
+  width: 25%;
   height: 10%;
   font-size: 24pt;
   top: 80%;
-  left: 35%;
+  left: 50%;
 }
 
 #startButton{
   position: absolute; 
-  width: 30%;
+  width: 25%;
   height: 10%;
   font-size: 24pt;
-  top: 60%;
-  left: 35%;
+  top: 80%;
+  left: 20%;
   /* visibility: hidden; */
 }
 
 #retryButton{
   position: absolute; 
-  width: 30%;
+  width: 25%;
   height: 10%;
   font-size: 24pt;
-  top: 60%;
-  left: 35%;
+  top: 80%;
+  left: 20%;
   visibility: hidden;
 }
 
-#choice1{
+#choiceOne{
   position: absolute; 
   width: 15%;
   height: 10%;
@@ -123,7 +123,7 @@ header{
   visibility: hidden;
 }
 
-#choice2{
+#choiceTwo{
   position: absolute; 
   width: 15%;
   height: 10%;
@@ -133,7 +133,7 @@ header{
   visibility: hidden;
 }
 
-#choice3{
+#choiceThree{
   position: absolute; 
   width: 15%;
   height: 10%;
@@ -146,8 +146,11 @@ header{
 #comment{
   font-size: 3vw;
   position: absolute;
-  top: 25%;
-  left: 25%;
+  top: 15%;
+  left: 22%;
+  width: 55%;
+  height: 40%;
+  text-align: center;
   /* visibility: hidden; */
 }
 
@@ -155,7 +158,9 @@ header{
   font-size: 4vw;
   position: absolute;
   top: 30%;
-  left: 40%;
+  left: 35%;
+  width: 10%;
+  text-align: center;
   visibility: hidden;
 }
 
@@ -163,7 +168,9 @@ header{
   font-size: 4vw;
   position: absolute;
   top: 30%;
-  left: 50%;
+  left: 45%;
+  width: 10%;
+  text-align: center;
   visibility: hidden;
 }
 
@@ -171,7 +178,9 @@ header{
   font-size: 4vw;
   position: absolute;
   top: 30%;
-  left: 60%;
+  left: 55%;
+  width: 10%;
+  text-align: center;
   visibility: hidden;
 }
 
@@ -187,7 +196,9 @@ header{
   font-size: 3vw;
   position: absolute;
   top: 20%;
-  left: 89%;
+  left: 85%;
+  width: 12%;
+  text-align: center;
   visibility: hidden;
 }
 
@@ -195,5 +206,20 @@ header{
   position: absolute;
   top: 35%;
   left: 75%;
+}
 
+table, td, th{
+  table-layout: auto;
+  text-align: center;
+  border: 2px #808080 solid;
+  /* visibility: hidden; */
+}
+
+select{
+  font-size: 2vw;
+  position: absolute;
+  top: 55%;
+  left: 40%;
+  width: 15%;
+  height: 5%;
 }
