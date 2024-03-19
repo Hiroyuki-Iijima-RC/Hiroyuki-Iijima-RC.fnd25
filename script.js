@@ -4,9 +4,9 @@
 let count = 0;
 
 const body = document.body;
-const counter100 = document.getElementById("counter100");
-const counter10 = document.getElementById("counter10");
-const counter1 = document.getElementById("counter1");
+const counterHundred = document.getElementById("counterHundred");
+const counterTen = document.getElementById("counterTen");
+const counterOne = document.getElementById("counterOne");
 const plusButton = document.getElementById("plusButton");
 const minusButton = document.getElementById("minusButton");
 const resetButton = document.getElementById("resetButton");
@@ -17,35 +17,44 @@ resetButton.addEventListener("click", resetCount);
 
 minusButton.disabled = "disabled";
 
- 
+// ３の数字で文字色を変える関数
+const counterStyle = function(index){
+  if (index === "100") {
+    if (judgeThree(count)[3]) {
+      counterHundred.style.color = "Red";
+    } else {
+      counterHundred.style.color = "";    
+    }
+  } else if (index === "10") {
+    if (judgeThree(count)[4]) {
+      counterTen.style.color = "Red";
+    } else {
+      counterTen.style.color = "";    
+    }
+  } else if (index === "1") {
+    if (judgeThree(count)[5]) {
+      counterOne.style.color = "Red";
+    } else {
+      counterOne.style.color = "";    
+    }
+  }
+};
+
+// ＋ボタンを押したときに実行
 function plusCount() {
   count++;
   minusButton.disabled = "";
   if (judgeThree(count)[0] !== 0) {
-    counter100.innerHTML = judgeThree(count)[0];
+    counterHundred.innerHTML = judgeThree(count)[0];
   }
   if (judgeThree(count)[1] !== 0 || judgeThree(count)[0] !== 0) {
-    counter10.innerHTML = judgeThree(count)[1];
+    counterTen.innerHTML = judgeThree(count)[1];
   }
-  counter1.innerHTML = judgeThree(count)[2];
+  counterOne.innerHTML = judgeThree(count)[2];
 
-  if (judgeThree(count)[3]) {
-    counter100.style.color = "Red";
-  } else {
-    counter100.style.color = "";    
-  }
-  
-  if (judgeThree(count)[4]) {
-    counter10.style.color = "Red";
-  } else {
-    counter10.style.color = "";    
-  }
-
-  if (judgeThree(count)[5]) {
-    counter1.style.color = "Red";
-  } else {
-    counter1.style.color = "";    
-  }
+  counterStyle("100");
+  counterStyle("10");
+  counterStyle("1");
 
   if (judgeThree(count)[6]) {
     body.style.backgroundColor = "aqua";
@@ -55,46 +64,33 @@ function plusCount() {
 
 }
 
+// －ボタンを押したときに実行
 function minusCount() {
   if (count > 0) { 
     count--;
     
   if (judgeThree(count)[0] !== 0) {
-    counter100.innerHTML = judgeThree(count)[0];
+    counterHundred.innerHTML = judgeThree(count)[0];
   } else {
-    counter100.innerHTML = "";
+    counterHundred.innerHTML = "";
   }
 
   if (judgeThree(count)[1] !== 0 || judgeThree(count)[0] !== 0) {
-    counter10.innerHTML = judgeThree(count)[1];
+    counterTen.innerHTML = judgeThree(count)[1];
   } else {
-    counter10.innerHTML = "";
+    counterTen.innerHTML = "";
   }
   
-  counter1.innerHTML = judgeThree(count)[2];
+  counterOne.innerHTML = judgeThree(count)[2];
   }
 
   if (count === 0) {
     minusButton.disabled = "disabled";
   }
 
-  if (judgeThree(count)[3]) {
-    counter100.style.color = "Red";
-  } else {
-    counter100.style.color = "";    
-  }
-  
-  if (judgeThree(count)[4]) {
-    counter10.style.color = "Red";
-  } else {
-    counter10.style.color = "";    
-  }
-  
-  if (judgeThree(count)[5]) {
-    counter1.style.color = "Red";
-  } else {
-    counter1.style.color = "";    
-  }
+  counterStyle("100");
+  counterStyle("10");
+  counterStyle("1");
 
   if (judgeThree(count)[6]) {
     body.style.backgroundColor = "aqua";
@@ -104,15 +100,17 @@ function minusCount() {
 
 }
 
+// resetボタンを押したときに実行
+// 全ての要素を初期値に戻す
 function resetCount() {
   count = 0;
-  counter100.innerText = "";
-  counter10.innerText = "";
-  counter1.innerText = 0;
+  counterHundred.innerText = "";
+  counterTen.innerText = "";
+  counterOne.innerText = 0;
 
-  counter100.style.color = "";
-  counter10.style.color = "";
-  counter1.style.color = "";
+  counterHundred.style.color = "";
+  counterTen.style.color = "";
+  counterOne.style.color = "";
   body.style.backgroundColor = "";
   minusButton.disabled = "disabled";
 }
@@ -120,40 +118,50 @@ function resetCount() {
 
 // ３の倍数と３が付く数字を判定する関数
 function judgeThree(num) {
-  const judgeArray = [0, 0, 0, false, false, false, false]; // [0,0,0,true,true,true,true][3桁目,2桁目,1桁目,3桁目が3,2桁目が3,1桁目が3,3の倍数か]
+  const judgeArray = [0, 0, 0, false, false, false, false]; 
+  // [3桁目, 2桁目, 1桁目, 3桁目が3, 2桁目が3, 1桁目が3, 3の倍数か]
 
-
+  //numが１桁の場合
   if (num.toString().length === 1) {
     judgeArray[2] = (Number(num.toString()[0]));
+    // １桁目が３か
     if (Number(num.toString()[0]) === 3) {
       judgeArray[5] = true;  
-    } 
+    }
+
+  //numが２桁の場合
   } else if (num.toString().length === 2) {
     judgeArray[1] = (Number(num.toString()[0]));
     judgeArray[2] = (Number(num.toString()[1]));
+    // ２桁目が３か
     if (Number(num.toString()[0]) === 3) {
       judgeArray[4] = true;
     }
+    // １桁目が３か
     if (Number(num.toString()[1]) === 3) {
       judgeArray[5] = true;
     }
+
+  // numが３桁の場合
   } else if (num.toString().length === 3) {
     judgeArray[0] = (Number(num.toString()[0]));
     judgeArray[1] = (Number(num.toString()[1]));
     judgeArray[2] = (Number(num.toString()[2]));
+    // ３桁目が３か
     if (Number(num.toString()[0]) === 3) {
       judgeArray[3] = true;
     }
+    // ２桁目が３か
     if (Number(num.toString()[1]) === 3) {
       judgeArray[4] = true;
     }
+    // １桁目が３か
     if (Number(num.toString()[2]) === 3) {
       judgeArray[5] = true;
     }
   }
-
-
-    
+  
+  // ０以外かつ３の倍数のとき
   if (num % 3 === 0 && num !== 0) {
     judgeArray[6] = true;
   }
