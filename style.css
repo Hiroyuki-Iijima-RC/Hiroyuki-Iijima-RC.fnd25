@@ -30,19 +30,19 @@ header{
 }
 
 #rulesBackButton{
+  font-size: 2vw;
   position: absolute; 
   width: 10%;
   height: 10%;
-  font-size: 24pt;
   top: 0%;
   left: 90%;
 }
 
 #moveRulesButton{
+  font-size: 1.5vw;
   position: absolute; 
   width: 10%;
   height: 8%;
-  font-size: 24pt;
   top: 0%;
   left: 90%;
 }
