@@ -25,6 +25,28 @@ header{
   opacity: 0.1;
 }
 
+#rules{
+  text-align: left;
+}
+
+#rulesBackButton{
+  position: absolute; 
+  width: 10%;
+  height: 10%;
+  font-size: 24pt;
+  top: 0%;
+  left: 90%;
+}
+
+#moveRulesButton{
+  position: absolute; 
+  width: 10%;
+  height: 8%;
+  font-size: 24pt;
+  top: 0%;
+  left: 90%;
+}
+
 #calculation{
   color: red;
   font-family: serif;
