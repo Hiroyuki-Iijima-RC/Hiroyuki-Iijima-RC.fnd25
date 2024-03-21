@@ -16,18 +16,13 @@ header{
   border-bottom: 1px solid #333;
 }
 
-/* p{
-  background-color: yellow;
-} */
-
 #top{
   color: green;
   font-family: serif;
 }
 
-#three{
-  color: red;
-  font-family: serif;
+#opa{
+  opacity: 0.1;
 }
 
 #calculation{
@@ -55,33 +50,6 @@ header{
   padding: 1em 0;
   font-size: 48pt;
   text-align: center;
-}
-
-#plusButton{
-  position: absolute;
-  width: 19%;
-  height: 10%;
-  font-size: 48pt;
-  top: 50%;
-  left: 51%;
-}
-
-#minusButton{
-  position: absolute; 
-  width: 19%;
-  height: 10%;
-  font-size: 48pt;
-  top: 50%;
-  left: 30%;
-}
-
-#resetButton{
-  position: absolute; 
-  width: 30%;
-  height: 10%;
-  font-size: 24pt;
-  top: 65%;
-  left: 35%;
 }
 
 #backButton{
